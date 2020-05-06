@@ -1,0 +1,38 @@
+version: '2.0'
+
+
+services:
+
+  database:
+    image: postgres:12-alpine
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    env_file: development.env
+
+  redis:
+    image: redis:5
+    command: redis-server --appendonly yes
+    volumes:
+      - ./redis:/data
+
+  site:
+    build: site
+    command: gunicorn anonchat.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./static:/static
+    expose:
+      - 8000
+    depends_on:
+      - database
+      - redis
+    env_file: development.env
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./static:/static
+    depends_on:
+      - site
+    ports:
+      - 8080:80
