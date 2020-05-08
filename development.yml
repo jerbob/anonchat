@@ -5,15 +5,11 @@ services:
 
   database:
     image: postgres:12-alpine
-    volumes:
-      - ./data:/var/lib/postgresql/data
     env_file: development.env
 
   redis:
     image: redis:5
     command: redis-server --appendonly yes
-    volumes:
-      - ./redis:/data
 
   site:
     build: site
