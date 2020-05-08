@@ -39,6 +39,7 @@
 
 .navbar {
   background-color: #282f2f;
+  border-radius: none;
 }
 
 .navbar-logo {
