@@ -13,6 +13,13 @@ then
 fi
 
 cd /usr/src/app/anonchat
+
 python manage.py collectstatic --no-input
+
+if [ $DEBUG ]
+then
+  python manage.py makemigrations --no-input
+  python manage.py migrate --no-input
+fi
 
 exec "$@"

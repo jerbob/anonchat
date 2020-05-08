@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script defer src="/static/js/index.js"></script>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <data id="app">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <div class="navbar-start">
+            <a class="navbar-item" href="/">
+              <span class="navbar-logo mdi mdi-incognito"></span>
+              Home
+            </a>
+          </div>
+
+          {% if request.session.registered %}
+            <div class="room-field field has-addons">
+              <div class="control is-expanded">
+                <input
+                  type="text"
+                  readonly=""
+                  id="chatroom"
+                  class="room-input input"
+                  v-bind:value="window.location.origin + '/{{ request.session.slug }}'"
+                >
+              </div>
+
+              <div class="control">
+                <a class="copy-button button is-info" v-on:click="copyChatRoom()">
+                  Copy
+                </a>
+              </div>
+            </div>
+
+             <div class="navbar-end">
+              <a class="button is-danger">
+                {{ request.session.username }}
+                <span class="logout-logo mdi mdi-run-fast"></span>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </nav>
+
+      <section class="section">
+        <div class="container">
+          {% block content %}{% endblock %}
+        </div>
+      </section>
+    </data>
+  </body>
+</html>

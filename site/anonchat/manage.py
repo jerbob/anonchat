@@ -4,7 +4,8 @@ import os
 import sys
 
 
-def main():
+def main() -> None:
+    """Entry point for the command-line utility."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'anonchat.settings')
     try:
         from django.core.management import execute_from_command_line

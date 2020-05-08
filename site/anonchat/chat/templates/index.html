@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}AnonChat{% endblock %}
+
+{% block content %}
+
+  <span class="logo mdi mdi-incognito"></span>
+  <h1 class="title section-heading">AnonChat</h1>
+
+  <p class="subtitle">Chat anonymously and in real-time.</p>
+  
+  {% if not request.session.registered %}
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        {% csrf_token %}
+        <input id="username" type="text" placeholder="Enter a nickname" class="input">
+      </div>
+      <div class="control">
+        <a v-on:click="registerUser" class="button is-info">Enter</a>
+      </div>
+    </div>
+  
+    <article v-if="tutorial" class="message">
+      <div class="message-header">
+        <p>How it works</p>
+        <button v-on:click="tutorial = false" class="delete" aria-label="delete"></button>
+      </div>
+      <div class="message-body">
+        Enter a nickname, and hit the "Enter" button above. <br>  
+        We'll generate a chat room for you, and you'll be redirected to your own custom URL
+        that you can share with your friends.
+      </div>
+    </article>
+
+    <div v-if="error.length" class="notification is-danger">
+      <button v-on:click="error = ''" class="delete"></button>
+      [[ error ]]
+    </div>
+  {% endif %}
+
+{% endblock %}
