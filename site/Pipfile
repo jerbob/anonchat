@@ -13,11 +13,13 @@ flake8-mypy = "==17.8.0"
 flake8-string-format = "==0.3.0"
 flake8-tidy-imports = "==4.1.0"
 flake8-todo = "==0.7"
+mypy = "*"
 
 [packages]
 gunicorn = "*"
 psycopg2-binary = "*"
 Django = "*"
+humanhash3 = "*"
 
 [requires]
 python_version = "3.8"
