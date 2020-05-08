@@ -3,7 +3,7 @@
 from api.models import Room
 
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic.base import TemplateView, View
 
 
@@ -12,7 +12,13 @@ class LogoutUserView(View):
 
     def get(self: View, request: HttpRequest) -> HttpResponse:
         """Logout a user, and delete their associated chatroom."""
-        ...
+        slug = request.session.get('slug')
+        if slug:
+            room = Room.objects.filter(slug=slug)
+            if room is not None:
+                room.delete()
+            request.session.flush()
+        return redirect('/')
 
 
 class ChatRoomView(TemplateView):
