@@ -12,7 +12,7 @@ services:
     command: redis-server --appendonly yes
 
   site:
-    build: site
+    image: aperture/anonchat:latest
     command: gunicorn anonchat.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./static:/static
