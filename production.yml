@@ -33,17 +33,8 @@ services:
     ports:
       - 8000:80
 
-  ouroboros:
-    container_name: ouroboros
-    hostname: ouroboros
-    image: pyouroboros/ouroboros
-    environment:
-      - CLEANUP=true
-      - INTERVAL=300
-      - LOG_LEVEL=info
-      - SELF_UPDATE=true
-      - IGNORE=postgres redis nginx
-      - TZ=Europe/London
-    restart: unless-stopped
+  watchtower:
+    image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    command: site --interval 30
