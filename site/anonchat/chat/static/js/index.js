@@ -64,8 +64,9 @@ var app = new Vue({
 
 let path = window.location.pathname.substring(1)
 if (path.length) {
+  let protocol = window.location.protocol == 'https:' ? 'wss://' : 'ws://'
   socket = new WebSocket(
-    'ws://' + window.location.hostname + ':' + window.location.port + '/ws/rooms' + window.location.pathname 
+    protocol + window.location.hostname + ':' + window.location.port + '/ws/rooms' + window.location.pathname 
   )
   socket.onmessage = function (event) {
     app.messages.push(JSON.parse(event.data))
