@@ -20,6 +20,8 @@ gunicorn = "*"
 psycopg2-binary = "*"
 Django = "*"
 humanhash3 = "*"
+channels = "*"
+channels-redis = "*"
 
 [requires]
 python_version = "3.8"
