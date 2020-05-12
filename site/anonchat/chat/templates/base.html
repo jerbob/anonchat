@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
     <link rel="stylesheet" href="/static/css/base.css">
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
@@ -26,15 +25,11 @@
 
           {% if request.session.registered %}
             <div class="room-field field has-addons">
-              <div class="control is-expanded">
-                <input
-                  type="text"
-                  readonly=""
-                  id="chatroom"
-                  class="room-input input"
-                  v-bind:value="window.location.origin + '/{{ request.session.slug }}'"
-                >
-              </div>
+              <a v-bind:href="room = window.location.origin + '/{{ request.session.slug }}'">
+                <div class="control is-expanded">
+                  <input type="text" readonly="" id="chatroom" class="room-input input" v-bind:value="room">
+                </div>
+              </a>
 
               <div class="control">
                 <a class="copy-button button is-info" v-on:click="copyChatRoom()">

@@ -18,5 +18,6 @@ class Message(models.Model):
     """Represents a message in one of our chatrooms."""
 
     time = models.DateTimeField(auto_now_add=True)
+    author = models.CharField(max_length=100)
     content = models.CharField(max_length=256)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)

@@ -13,7 +13,13 @@
     <div class="field has-addons">
       <div class="control is-expanded">
         {% csrf_token %}
-        <input id="username" type="text" placeholder="Enter a nickname" class="input">
+        <input
+          v-on:keyup.enter="registerUser"
+          placeholder="Enter a nickname"
+          id="username"
+          class="input"
+          type="text"
+        >
       </div>
       <div class="control">
         <a v-on:click="registerUser" class="button is-info">Enter</a>

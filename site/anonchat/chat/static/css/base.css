@@ -16,8 +16,16 @@
   position: relative;
 }
 
+.navbar {
+  border-radius: 0;
+}
+
 .button.is-info {
   background-color: #343c3d;
+}
+
+a {
+  width: 100%;
 }
 
 .input, .select select, .textarea {
@@ -28,6 +36,24 @@
 
 .input:active, .input:focus, .is-active.input, .is-active.textarea, .is-focused.input, .is-focused.textarea, .select select.is-active, .select select.is-focused, .select select:active, .select select:focus, .textarea:active, .textarea:focus {
   box-shadow: none;
+}
+
+#chatroom {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.hero-body, .section {
+  padding: 1.5rem;
+}
+
+.message-bar {
+  position: fixed;
+  bottom: 0.4em;
+  right: 0.4em;
+  left: 0.4em;
+  border-radius: 0.4em;
+  box-shadow: 0px 0px 100px 3px #1c2121;
 }
 
 .logo-navbar {
