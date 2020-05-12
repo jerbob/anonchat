@@ -72,6 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'anonchat.wsgi.application'
+ASGI_APPLICATION = 'anonchat.routing.application'
 
 
 # Database
@@ -85,6 +86,17 @@ DATABASES = {
         'HOST': os.getenv('SQL_HOST'),
         'PORT': os.getenv('SQL_PORT')
     }
+}
+
+# Django Channels configuration
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('redis', 6379)],
+        },
+    },
 }
 
 # Password validation

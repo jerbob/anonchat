@@ -16,12 +16,12 @@ flake8-todo = "==0.7"
 mypy = "*"
 
 [packages]
-gunicorn = "*"
 psycopg2-binary = "*"
 Django = "*"
 humanhash3 = "*"
 channels = "*"
 channels-redis = "*"
+daphne = "*"
 
 [requires]
 python_version = "3.8"
