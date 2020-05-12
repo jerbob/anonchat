@@ -14,8 +14,26 @@
   </head>
   <body>
     <data id="app">
+      {% if not request.session.registered and request.path != '/' %}
+        <div v-if="registerModal" class="modal is-active">
+          <div class="modal-background" v-on:click="registerModal = false"></div>
+          <div class="modal-content">
+            <div class="field has-addons">
+              <div class="control is-expanded">
+                <input placeholder="Enter a nickname" id="username" type="text" class="input">
+              </div>
+              <div class="control">
+                <a class="button is-info" v-on:click="registerUser">Enter</a>
+              </div>
+            </div>
+          </div>
+          <button v-on:click="registerModal = false" class="modal-close is-large" aria-label="close"></button>
+        </div>
+      {% endif %}
+
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
+
           <div class="navbar-start">
             <a class="navbar-item" href="/">
               <span class="navbar-logo mdi mdi-incognito"></span>
@@ -38,12 +56,14 @@
               </div>
             </div>
 
-             <div class="navbar-end">
+            <div class="navbar-end">
               <a href="/logout" class="button is-danger">
                 {{ request.session.username }}
                 <span class="logout-logo mdi mdi-run-fast"></span>
               </a>
             </div>
+          {% elif request.path != '/' %}
+            <div class="navbar-end"><a v-on:click="registerModal = true" class="button is-info">Register</a></div>
           {% endif %}
         </div>
       </nav>

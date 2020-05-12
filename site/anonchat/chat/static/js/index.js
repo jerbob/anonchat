@@ -29,8 +29,9 @@ var app = new Vue({
   delimiters: ['[[', ']]'],
   data: {
     error: '',
+    messages: [],
     tutorial: true,
-    messages: []
+    registerModal: false
   },
   methods: {
     sendMessage() {
@@ -51,7 +52,7 @@ var app = new Vue({
         'register',
         {username: username},
         function (data) {
-          window.location = '/' + data.slug
+          window.location.reload()
         }
       )
     },
