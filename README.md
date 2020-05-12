@@ -11,7 +11,7 @@ $ docker-compose -f development.yml up -d
 ```
 
 ## Deployment
-The site's docker container is on [Docker Hub](https://hub.docker.com/repository/docker/aperture/anonchat), so the only file you'll need is [docker-compose.yml](https://raw.githubusercontent.com/AnonGuy/technical-test/master/docker-compose.yml). <br>
+The site's docker container is on [Docker Hub](https://hub.docker.com/repository/docker/anonguy/anonchat), so the only file you'll need is [docker-compose.yml](https://raw.githubusercontent.com/AnonGuy/technical-test/master/docker-compose.yml). <br>
 You'll need to create an `.env` file in the same directory as `docker-compose.yml`. Set the following variables:
 ```sh
 STATIC_ROOT=static
