@@ -31,7 +31,6 @@ $ docker-compose up -d
 ```
 Then run migrations:
 ```
-$ docker-compose exec site anonchat/manage.py makemigrations
 $ docker-compose exec site anonchat/manage.py migrate
 ```
 To manage Messages and Rooms in the Django admin interface, create a superuser:
