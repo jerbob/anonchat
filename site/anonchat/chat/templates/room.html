@@ -34,7 +34,7 @@
         <input v-on:keyup.enter="sendMessage" id="message" placeholder="Enter a message" class="input">
       </div>
       <div class="control">
-        <a class="button is-info" v-on:click="sendMessage">Send</a>
+        <a id="send-button" class="button is-info" v-on:click="sendMessage">Send</a>
       </div>
     </div>
   {% endif %}

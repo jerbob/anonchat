@@ -35,16 +35,19 @@ var app = new Vue({
   },
   methods: {
     sendMessage() {
-      let message = document.getElementById('message')
+      let button = document.getElementById('send-button');
+      button.classList.add('is-loading');
+      let message = document.getElementById('message');
       post(
         'rooms' + window.location.pathname + '/post',
         {content: message.value},
         function(data) {
-          socket.send(JSON.stringify(data.message))
-          document.body.scrollIntoView(false)
+          socket.send(JSON.stringify(data.message));
+          document.body.scrollIntoView(false);
         }
-      )
-      message.value = ""
+      );
+      message.value = "";
+      button.classList.remove('is-loading');
     },
     registerUser() {
       let username = document.getElementById('username').value
