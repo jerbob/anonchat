@@ -20,6 +20,7 @@ if [ $DEBUG ]
 then
   python manage.py makemigrations --no-input
   python manage.py migrate --no-input
+  python manage.py createsuperuser --no-input
 fi
 
 exec "$@"
