@@ -20,6 +20,7 @@
           <div class="modal-content">
             <div class="field has-addons">
               <div class="control is-expanded">
+                {% csrf_token %}
                 <input placeholder="Enter a nickname" id="username" type="text" class="input">
               </div>
               <div class="control">
