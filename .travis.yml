@@ -1,4 +1,5 @@
 language: python
+
 python:
   - "3.8"
 
@@ -6,10 +7,18 @@ branches:
   only:
     - master
 
+services:
+  - docker
+
 install:
+  - docker build -t anonguy/anonchat:latest site
   - pip install -r requirements-ci.txt
 
 script:
   - flake8 site
+
+deploy:
+  provider: script
+  script: bash deploy.sh
 
 cache: pip
