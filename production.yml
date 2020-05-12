@@ -9,11 +9,10 @@ services:
 
   redis:
     image: redis:5
-    command: redis-server --appendonly yes
 
   site:
     image: aperture/anonchat:latest
-    command: gunicorn anonchat.wsgi:application --bind 0.0.0.0:8000
+    command: daphne -b 0.0.0.0 -p 8000 anonchat.asgi:application
     volumes:
       - ./static:/static
     expose:
@@ -32,9 +31,3 @@ services:
       - site
     ports:
       - 8000:80
-
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30
