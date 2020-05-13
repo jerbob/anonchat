@@ -16,6 +16,7 @@ install:
 
 script:
   - flake8 site
+  - docker run --env-file development.env -e DEBUG="" anonguy/anonchat:latest /usr/src/app/anonchat/manage.py test api
 
 deploy:
   provider: script
