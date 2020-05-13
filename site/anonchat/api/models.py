@@ -21,3 +21,7 @@ class Message(models.Model):
     author = models.CharField(max_length=100)
     content = models.CharField(max_length=256)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+
+    def __str__(self: models.Model) -> str:
+        """Represent Messages using author and content."""
+        return f'{self.author}: {self.content}'
