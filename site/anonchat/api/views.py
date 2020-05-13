@@ -11,25 +11,43 @@ from django.views.generic import View
 from humanhash import humanize
 
 
+def error(message: str, code: int = 418) -> JsonResponse:
+    """
+    Generate a JSON error response.
+
+    >>> error = error('I am a teapot.', 418)
+    >>> error == JsonResponse({
+            'success': False,
+            'error': 'I am a teapot',
+        }, status=418)
+    True
+    """
+    return JsonResponse(
+        {
+            'success': False,
+            'error': message
+        },
+        status=code
+    )
+
+
 class RegisterUserView(View):
     """POST to this endpoint to register a user."""
 
     def post(self: View, request: HttpRequest) -> JsonResponse:
         """Create a user, provided the username."""
-        payload = json.loads(request.body.decode())
+        try:
+            payload = json.loads(request.body.decode())
+        except json.JSONDecodeError:
+            return error('You supplied incorrect data.')
+
         username = str(payload.get('username', ''))
 
         if request.session.get('registered'):
-            return JsonResponse({
-                'success': False,
-                'error': 'You are already registered.'
-            })
+            return error('You are already registered.')
 
         if not 1 <= len(username) <= 100:
-            return JsonResponse({
-                'success': False,
-                'error': 'Username must be between 1 and 100.'
-            })
+            return error('Username length must be between 1 and 100.')
 
         digest = uuid4().hex
         slug = humanize(digest)
@@ -55,23 +73,14 @@ class PostMessageView(View):
         content = str(payload.get('content', ''))
 
         if not 1 <= len(content) <= 256:
-            return JsonResponse({
-                'success': False,
-                'error': 'Content must be between 1 and 256.'
-            })
+            return error('Content length must be between 1 and 256.')
 
         if not request.session.get('registered'):
-            return JsonResponse({
-                'success': False,
-                'error': 'You are not registered.'
-            })
+            return error('You are not registered.')
 
         room = Room.objects.filter(slug=slug).first()
         if room is None:
-            return JsonResponse({
-                'success': False,
-                'error': 'That room does not exist.'
-            })
+            return error('That room does not exist.')
 
         message = Message(
             author=request.session.get('username'),
