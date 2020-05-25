@@ -1,4 +1,4 @@
-# AnonChat [![Build Status](https://travis-ci.com/AnonGuy/technical-test.svg?branch=master)](https://travis-ci.com/AnonGuy/technical-test)
+# AnonChat [![Build Status](https://travis-ci.com/AnonGuy/anonchat.svg?branch=master)](https://travis-ci.com/AnonGuy/technical-test)
 
 A website for creating anonymous, ephemeral chatrooms.
 
